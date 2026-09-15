@@ -1,0 +1,1 @@
+from .vocab import router as vocab_router
