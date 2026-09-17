@@ -8,14 +8,17 @@ from dependencies import get_user_supabase
 
 router = APIRouter(prefix="/vocab", tags=["Vocab"])
 
+
 @router.get("/", response_model=List[VocabResponse])
-def get_vocab(client: Client = Depends(get_user_supabase)):
-  return VocabService.get_vocab(client)
+def get_vocab(session=Depends(get_user_supabase)):
+    return VocabService.get_vocab(session[0])
+
 
 @router.get("/id/{id}", response_model=List[VocabResponse])
-def get_vocab_by_id(id: int, client: Client = Depends(get_user_supabase)):
-  return VocabService.get_vocab_by_id(client, id)
+def get_vocab_by_id(session=Depends(get_user_supabase)):
+    return VocabService.get_vocab_by_id(session[0], id)
+
 
 @router.get("/word/{word}", response_model=List[VocabResponse])
-def get_vocab_by_word(word: str, client: Client = Depends(get_user_supabase)):
-  return VocabService.get_vocab_by_word(client, word)
+def get_vocab_by_word(word: str, session=Depends(get_user_supabase)):
+    return VocabService.get_vocab_by_word(session[0], word)

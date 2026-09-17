@@ -1,2 +1,2 @@
 from .vocab import VocabResponse
-from .user import UserVocabResponse
+from .user import UserVocabResponse, UserVocabCreate

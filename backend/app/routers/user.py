@@ -8,6 +8,12 @@ from dependencies import get_user_supabase
 
 router = APIRouter(prefix="/user-vocab", tags=["User Vocab"])
 
+
 @router.get("/", response_model=List[UserVocabResponse])
-def get_user_vocab(client: Client = Depends(get_user_supabase)):
-    return UserService.get_user_vocab(client)
+def get_user_vocab(session=Depends(get_user_supabase)):
+    return UserService.get_user_vocab(session[0])
+
+
+@router.post("/vocab-word/{word}")
+def add_user_vocab_by_word(word: str, session=Depends(get_user_supabase)):
+    UserService.add_user_vocab_by_word(session, word)

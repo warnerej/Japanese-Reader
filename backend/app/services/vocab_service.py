@@ -1,5 +1,6 @@
 from supabase import Client
 
+
 class VocabService:
     @staticmethod
     def get_vocab(client: Client):
@@ -17,5 +18,11 @@ class VocabService:
         if response.data:
             return response.data
         else:
-            response = client.table("vocab").select("*").eq("reading", word).is_("kanji", "null").execute()
+            response = (
+                client.table("vocab")
+                .select("*")
+                .eq("reading", word)
+                .is_("kanji", "null")
+                .execute()
+            )
             return response.data

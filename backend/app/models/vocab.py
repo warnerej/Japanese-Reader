@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from typing import Any, Dict, List
 
+
 class VocabResponse(BaseModel):
     id: int
     kanji: str | None
